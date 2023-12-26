@@ -1,3 +1,16 @@
+# Sileo-AFL++
+
+This is a modified version of AFL++ 4.04c to sample every n-th testcase to an output directory, given by a sampling rate.
+To use this set the following environment variables:
+
+```shell
+export SILEO_SAMPLING_DIR=/YOUR/SAMPLING/DIRECTORY
+export SILEO_SAMPLING_RATE=100000
+```
+
+-----
+
+
 # American Fuzzy Lop plus plus (AFL++)
 
 <img align="right" src="https://raw.githubusercontent.com/AFLplusplus/Website/master/static/aflpp_bg.svg" alt="AFL++ logo" width="250" heigh="250">
