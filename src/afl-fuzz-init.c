@@ -1918,6 +1918,28 @@ void setup_dirs_fds(afl_state_t *afl) {
 
   ACTF("Setting up output directories...");
 
+  // sileo stuff
+
+  char *sileo_sampling_dir = getenv("SILEO_SAMPLING_DIR");
+
+  if (sileo_sampling_dir) {
+
+    afl->sileo_sampling_dir = sileo_sampling_dir;
+    
+    if (mkdir(afl->sileo_sampling_dir, 0700) && errno != EEXIST) {
+      PFATAL("Unable to create '%s'", afl->sileo_sampling_dir);
+    }
+  }
+
+  char *sileo_sampling_rate = getenv("SILEO_SAMPLING_RATE");
+
+  if (sileo_sampling_rate) {
+    afl->sileo_sampling_rate = atoi(sileo_sampling_rate);
+  }
+
+  // end sileo stuff
+
+
   if (afl->sync_id && mkdir(afl->sync_dir, 0700) && errno != EEXIST) {
 
     PFATAL("Unable to create '%s'", afl->sync_dir);

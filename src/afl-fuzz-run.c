@@ -76,6 +76,31 @@ fuzz_run_target(afl_state_t *afl, afl_forkserver_t *fsrv, u32 timeout) {
 u32 __attribute__((hot))
 write_to_testcase(afl_state_t *afl, void **mem, u32 len, u32 fix) {
 
+  // sileo stuff
+  u64 total_execs = afl->fsrv.total_execs;
+
+  char *dst_folder = afl->sileo_sampling_dir;
+  if (dst_folder){
+    u32 sample_rate = afl-> sileo_sampling_rate;
+
+    // give current time in ms
+    struct timeval te;
+    gettimeofday(&te, NULL);
+    u64 ts_ms = te.tv_sec*1000LL + te.tv_usec/1000;
+
+    if ((total_execs % sample_rate) == 0) {
+      u8 * filename = alloc_printf("%s/%llu-%llu", dst_folder, total_execs, ts_ms);
+
+      FILE *fp = fopen(filename, "wb");
+      if (fp) {
+        fwrite(*mem, 1, len, fp);
+        fclose(fp);
+      }
+    }
+  }
+  // sileo stuff
+
+
   if (unlikely(afl->custom_mutators_count)) {
 
     ssize_t new_size = len;

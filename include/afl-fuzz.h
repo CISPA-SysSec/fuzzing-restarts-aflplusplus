@@ -766,6 +766,9 @@ typedef struct afl_state {
   u32   bitsmap_size;
 #endif
 
+  char *sileo_sampling_dir;
+  u32 sileo_sampling_rate;
+
 } afl_state_t;
 
 struct custom_mutator {
