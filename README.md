@@ -1,6 +1,6 @@
-# Sileo-AFL++
+# Fuzzing-Restarts: AFL++
 
-This is a modified version of AFL++ 4.04c to sample every n-th testcase to an output directory, given by a sampling rate.
+This repository is part of our paper *[Novelty Not Found: Adaptive Fuzzer Restarts to Improve Input Space Coverage](https://mschloegel.me/paper/schiller2023fuzzerrestarts.pdf)* and contains a modified version of AFL++ 4.04c to sample every n-th testcase to an output directory, given by a sampling rate. Have a look at our [main repository](https://github.com/CISPA-SysSec/fuzzing-restarts) for more information.
 To use this set the following environment variables:
 
 ```shell
